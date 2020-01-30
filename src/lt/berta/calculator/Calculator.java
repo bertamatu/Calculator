@@ -52,6 +52,7 @@ public class Calculator extends javax.swing.JFrame {
         jBtnMinus = new javax.swing.JButton();
         jBtnMultiplication = new javax.swing.JButton();
         jBtnDivision = new javax.swing.JButton();
+        jBtnClear1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -261,6 +262,17 @@ public class Calculator extends javax.swing.JFrame {
             }
         });
 
+        jBtnClear1.setBackground(new java.awt.Color(64, 64, 64));
+        jBtnClear1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBtnClear1.setForeground(new java.awt.Color(0, 172, 230));
+        jBtnClear1.setText("%");
+        jBtnClear1.setAlignmentY(0.0F);
+        jBtnClear1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnClear1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,11 +305,12 @@ public class Calculator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnSum, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtn0, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnClear1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBtn0, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnDot, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBtnDot, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                             .addComponent(jBtnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -344,10 +357,12 @@ public class Calculator extends javax.swing.JFrame {
                         .addComponent(jBtnMinus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jBtnDot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnClear1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jBtnResult, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pack();
@@ -442,9 +457,11 @@ public class Calculator extends javax.swing.JFrame {
                 jTxtDisplay.setText(answer);
                 break;
             case "/":
-                result = firstNum / secondNum;
-                answer = String.format("%.0f", result);
-                jTxtDisplay.setText(answer);
+                if( secondNum ==0){ result = 0; }
+                    else { result = firstNum / secondNum;
+                           answer = String.format("%.0f", result);
+                           jTxtDisplay.setText(answer);
+                    }
                 break;
             case "+":
                 result = firstNum + secondNum;
@@ -465,9 +482,11 @@ public class Calculator extends javax.swing.JFrame {
 //        }
 //        else if ("/".equals(operation))
 //        {
-//            result = firstNum / secondNum;
-//            answer = String.format("%.0f", result);
-//            jTxtDisplay.setText(answer);
+//            if( secondNum ==0){ result = 0; }
+//                    else { result = firstNum / secondNum;
+//                           answer = String.format("%.0f", result);
+//                           jTxtDisplay.setText(answer);
+//                    }
 //        }
 //        else if ("+".equals(operation))
 //        {
@@ -486,7 +505,7 @@ public class Calculator extends javax.swing.JFrame {
 //            result = firstNum % secondNum;
 //            answer = String.format("%.0f", result);
 //            jTxtDisplay.setText(answer);
-//        }
+                
         }
     }//GEN-LAST:event_jBtnResultActionPerformed
 
@@ -505,8 +524,12 @@ public class Calculator extends javax.swing.JFrame {
     private void jBtnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDivisionActionPerformed
         firstNum = Double.parseDouble(jTxtDisplay.getText());
         jTxtDisplay.setText("");
-        operation = "/";
+        operation = "/"; 
     }//GEN-LAST:event_jBtnDivisionActionPerformed
+
+    private void jBtnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClear1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnClear1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -549,6 +572,7 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton jBtn8;
     private javax.swing.JButton jBtn9;
     private javax.swing.JButton jBtnClear;
+    private javax.swing.JButton jBtnClear1;
     private javax.swing.JButton jBtnDivision;
     private javax.swing.JButton jBtnDot;
     private javax.swing.JButton jBtnMinus;
